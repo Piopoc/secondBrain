@@ -15,3 +15,4 @@ Chronological record of all operations.
 - [2026-05-16] synthesize | Created comprehensive narrative synthesis: Evoluzione delle Architetture Neural LM.
 - [2026-05-16] maintenance | IR Audit - Performed link validation and orphan resolution for all IR modules. Renamed files to remove redundant prefixes and updated naming conventions (spaces instead of underscores).
 - [2026-05-16] maintenance | Index Restructuring - Implemented hierarchical index structure in wiki/index.md and updated SKILLS.md protocol.
+- [2026-05-17] ingest | WA Course - Full analysis of 13 raw folders (WA-02 to WA-14). Created detailed academic summaries, renamed files for clarity, and organized them into a dedicated wiki module with index.
