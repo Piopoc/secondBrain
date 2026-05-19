@@ -1,0 +1,7 @@
+---
+date: 2026-05-18
+source: [[WA - 05]]
+tags: [concept, web]
+---
+# Document Object Model
+(DOM) A programming interface for HTML and XML documents. It represents the page so that programs can change the document structure, style, and content.

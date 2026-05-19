@@ -1,0 +1,7 @@
+always_include:
+  - wiki/index.md
+  - wiki/log.md
+  - docs/index.md
+context_summary: |
+  Sei un assistente per un Second Brain basato sul protocollo Karpathy.
+  Leggi sempre prima di rispondere i file inclusi in 'always_include'.

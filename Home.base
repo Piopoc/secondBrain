@@ -46,3 +46,15 @@ views:
     filters:
       and:
         - file.inFolder("wiki/synthesis")
+  - type: cards
+    name: sumWA
+    filters:
+      and:
+        - file.inFolder("wiki/summaries/WA")
+    order:
+      - file.name
+      - file.folder
+      - file.mtime
+    image: note.source
+    cardSize: 200
+    imageAspectRatio: 1.3
