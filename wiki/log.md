@@ -26,3 +26,6 @@ Chronological record of all operations.
 - [2026-05-18] maintenance | WA Summaries - Refactored WA-11 summary. Implemented atomic concepts for HTML5, SEO, the CIA triad, XSS, and CSRF.
 - [2026-05-18] maintenance | WA Summaries - Refactored WA-13 summary. Implemented atomic concepts for CSS, Selectors, and Responsive Design.
 - [2026-05-18] maintenance | WA Summaries - Refactored WA-14 summary. Implemented atomic concepts for JavaScript, dynamic typing, and object-oriented JS.
+- [2026-05-21] ingest | IR Measurement Theory - Processed raw/16. Created summary, 7 concepts, 6 entities and updated IR Index.
+- [2026-05-21] ingest | IR Advanced Topics - Analyzed raw/13-15 images. Created summaries for RAG Alternatives, Manifold/DIMEs and Quantum Computing. Updated IR Index.
+- [2026-05-21] ingest | WA Semantic Web & Forms - Processed Semantic_Web_Summary.md and Form_Validation_AJAX_Summary.md. Created 15+ concepts, 1 entity and 2 summaries in /wiki/summaries/WA/. Updated WA Index.

@@ -28,6 +28,10 @@ Questo indice mappa l'intero percorso del corso di Information Retrieval, integr
 - [[MATLAB t-test TREC]]: Practical implementation of paired t-test on TREC datasets using MATLAB.
 - [[Knowledge Graphs]]: Introduction to Knowledge Graphs, RDF triples, and Entity-Oriented Search.
 - [[Neural Networks Basics]]: Fondamenti di Logistic Regression, FFNN, RNN e Transformers.
+- [[RAG_Alternatives]]: Evolution of Retrieval-Augmented Generation: Naive, Advanced, and Modular RAG.
+- [[Manifold_and_DIMEs]]: Manifold Hypothesis and Dimension Importance Estimators (DIMEs) for query optimization.
+- [[Quantum_Computing_IR]]: Application of Quantum Annealing and QUBO to search and optimization.
+- [[Measurement Theory in IR]]: Teoria della misurazione, scale di Stevens e validità statistica delle metriche IR.
 
 ## 📝 Risorse Pratiche
 - [[IR-Exam-Simulation]]: Esercizi numerici simulati per il parziale (TF-IDF, Cosine Similarity, Metriche di Valutazione, BM25, LM).

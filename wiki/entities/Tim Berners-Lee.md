@@ -1,7 +1,5 @@
----
-date: 2026-05-18
-source: [[WA - 02]]
-tags: [person, history]
----
 # Tim Berners-Lee
-Computer scientist who invented the [[World Wide Web]] in 1989, creating the first web browser and the fundamental protocols: [[HTTP]], [[HTML]], and [[URL]].
+
+**Tim Berners-Lee** is the inventor of the World Wide Web and a primary advocate for the Semantic Web.
+
+- **Key Contribution:** He defined the four foundational principles of **Linked Data**, which guide the publishing and connecting of structured data on a global scale.

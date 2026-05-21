@@ -14,3 +14,5 @@ This directory contains detailed summaries of the materials for the Web Applicat
 - [[wiki/summaries/WA/HTML5|HTML5]]
 - [[CSS]]
 - [[JavaScript]]
+- [[Form_Validation_and_AJAX]]
+- [[Semantic_Web]]
