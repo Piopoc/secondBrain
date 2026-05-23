@@ -8,7 +8,7 @@ views:
       - file.name
       - file.folder
       - file.mtime
-    cardSize: 260
+    cardSize: 200
     imageAspectRatio: 1.3
     image: note.source
   - type: table

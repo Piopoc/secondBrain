@@ -28,8 +28,8 @@ Modern web applications separate logic into three distinct layers: [[Presentatio
 1. **[[Single-tier Architecture]]**: All logic on one system (e.g., Mainframe). Simple but not scalable.
 2. **[[Two-tier Architecture]]**:
     - **Fat Client**: Logic on client, data on server.
-    - **Thin Client**: Logic on server, presentation on client.
-3. **[[Three-tier Architecture]]**: Separation into Thin Client $\rightarrow$ Application Server $\rightarrow$ Database Server. High scalability and easy maintenance.
+    - **Thin Client**:  Presentation on client, logic on server.
+3. **[[Three-tier Architecture]]**: Separation into: Thin Client <--> Application Server <--> Database Server. High scalability and easy maintenance.
 
 ## Web Application Stack
 Web applications are an implementation of the 3-tier model. They operate on a [[Web Application Stack]] (Request/Response) which sits atop the [[Network Stack]] (HTTP $\rightarrow$ TCP/UDP $\rightarrow$ IP $\rightarrow$ Physical).

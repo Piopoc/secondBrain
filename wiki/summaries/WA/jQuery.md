@@ -12,29 +12,27 @@
 
 ## ⚡ Cheat Sheet (Sintesi Operativa)
 
-| Category | Method | Description | Example |
-| :--- | :--- | :--- | :--- |
-| **Selection** | `$()` | Selects elements via CSS selectors | `$("div.main")` |
-| **Attributes** | `.attr()` | Get/Set HTML attributes | `$("a").attr("href", "url")` |
-| **Styling** | `.css()` | Get/Set CSS properties | `$("h1").css("color", "blue")` |
-| **Classes** | `.addClass()/.removeClass()/.toggleClass()` | Manage CSS classes | `$("div").toggleClass("active")` |
-| **Forms** | `.val()` | Get/Set form field values | `$("#input").val("Hello")` |
-| **Content** | `.text()` / `.html()` | Set/Get plain text or HTML | `$("p").text("New text")` |
-| **Insertion** | `.append()` / `.prepend()` | Insert at end / start of target | `$("#log").append("<span>!</span>")` |
-| **Insertion** | `.after()` / `.before()` | Insert after / before target | `$("h1").after("<hr/>")` |
-| **Insertion** | `.replaceWith()` | Replace target with content | `$("hr").replaceWith("<br/>")` |
-| **Copy/Wrap** | `.clone()` | Deep copy of element | `$(".item").clone().appendTo("body")` |
-| **Copy/Wrap** | `.wrap()` / `.wrapInner()` / `.wrapAll()` | Wrap element/content/group | `$("h1").wrap("<i></i>")` |
-| **Deletion** | `.empty()` / `.remove()` / `.detach()` | Clear children / Remove / Detach | `$(".old").remove()` |
-| **Events** | `.click()`, `.blur()`, etc. | Simple event registration | `$("p").click(fn)` |
-| **Events** | `.bind()` / `.unbind()` | Advanced event management | `$("a").bind("mouseenter", fn)` |
-| **AJAX** | `$.ajax()` | Fully configurable HTTP request | `$.ajax({ method: "POST", ... })` |
-| **AJAX** | `$.get()` / `$.post()` | Simple GET/POST requests | `$.get(url, callback)` |
-| **AJAX** | `$.getJSON()` | Fetch and parse JSON data | `$.getJSON(url, callback)` |
-| **AJAX** | `.load()` | Load HTML fragment into element | `$("#div").load("page.html #id")` |
+| Category       | Method                                      | Description                        | Example                               |
+| :------------- | :------------------------------------------ | :--------------------------------- | :------------------------------------ |
+| **Selection**  | `$()`                                       | Selects elements via CSS selectors | `$("div.main")`                       |
+| **Attributes** | `.attr()`                                   | Get/Set HTML attributes            | `$("a").attr("href", "url")`          |
+| **Styling**    | `.css()`                                    | Get/Set CSS properties             | `$("h1").css("color", "blue")`        |
+| **Classes**    | `.addClass()/.removeClass()/.toggleClass()` | Manage CSS classes                 | `$("div").toggleClass("active")`      |
+| **Forms**      | `.val()`                                    | Get/Set form field values          | `$("#input").val("Hello")`            |
+| **Content**    | `.text()` / `.html()`                       | Set/Get plain text or HTML         | `$("p").text("New text")`             |
+| **Insertion**  | `.append()` / `.prepend()`                  | Insert at end / start of target    | `$("#log").append("<span>!</span>")`  |
+| **Insertion**  | `.after()` / `.before()`                    | Insert after / before target       | `$("h1").after("<hr/>")`              |
+| **Insertion**  | `.replaceWith()`                            | Replace target with content        | `$("hr").replaceWith("<br/>")`        |
+| **Copy/Wrap**  | `.clone()`                                  | Deep copy of element               | `$(".item").clone().appendTo("body")` |
+| **Copy/Wrap**  | `.wrap()` / `.wrapInner()` / `.wrapAll()`   | Wrap element/content/group         | `$("h1").wrap("<i></i>")`             |
+| **Deletion**   | `.empty()` / `.remove()` / `.detach()`      | Clear children / Remove / Detach   | `$(".old").remove()`                  |
+| **Events**     | `.click()`, `.blur()`, etc.                 | Simple event registration          | `$("p").click(fn)`                    |
+| **Events**     | `.bind()` / `.unbind()`                     | Advanced event management          | `$("a").bind("mouseenter", fn)`       |
+| **AJAX**       | `$.ajax()`                                  | Fully configurable HTTP request    | `$.ajax({ method: "POST", ... })`     |
+| **AJAX**       | `$.get()` / `$.post()`                      | Simple GET/POST requests           | `$.get(url, callback)`                |
+| **AJAX**       | `$.getJSON()`                               | Fetch and parse JSON data          | `$.getJSON(url, callback)`            |
+| **AJAX**       | `.load()`                                   | Load HTML fragment into element    | `$("#div").load("page.html #id")`     |
 
-
----
 
 ## ✍️ Quiz di Autovalutazione
 
