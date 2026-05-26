@@ -157,7 +157,7 @@ Il resto del meccanismo (features, pesi, cross-entropy, SGD) rimane identico.
 - **Hidden state**: $h_t = g(U h_{t-1} + W x_t)$
   - $U$: matrice ricorrente (pesi per lo stato precedente)
   - $W$: matrice per l'input corrente
-- **Memoria**: Lo stato nascosto funge da contesto cumulativo per l'intera sequenza
+- **Memoria**: Lo stato nascosto funge da contesto per l'intera sequenza (recursion)
 
 ### 4.2 Due Problemi Critici delle RNN
 
@@ -203,89 +203,53 @@ Processo passo-passo:
 
 **Parallelismo con IR**: Il calcolo dei pesi di attenzione equivale a un task di information retrieval — *"quanto è simile questo token del decoder a ogni token dell'encoder?"*
 
-### 5.3 Self-Attention (precursore nei Transformer)
-
-- Ogni token della sequenza interagisce con **tutti gli altri token** della stessa sequenza
-- **Query, Key, Value**: Lo stesso token viene proiettato in tre spazi diversi tramite tre matrici apprese ($W_Q$, $W_K$, $W_V$)
-  - **Query (Q)**: valore che sto cercando
-  - **Key (K)**: la label che rappresenta il token per il matching
-  - **Value (V)**: valore effettivo da estrarre
-- **Scaled Dot-Product Attention**:
-  $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
-
 ---
 
 ## 6. Transformer: La Rivoluzione
 ![[transformer_workflow.svg]]
 ### 6.1 Self-Attention nei Transformer
 
-**Differenza dall'attenzione classica**: 
 - Attenzione classica: decoder interroga encoder (cross-attention)
 - Self-attention: ogni token interroga tutti gli altri token della **stessa** sequenza
-
-**Query-Key-Value in dettaglio**:
-- **Query**: Rappresenta il token su cui ci si concentra
-- **Key**: Rappresenta il token valutato dalla query
-- **Value**: È il contenuto effettivo — se query e key hanno alto match, il valore contribuirà significativamente alla rappresentazione finale
+---
+- Ogni token della sequenza interagisce con **tutti gli altri token** della stessa sequenza
+- **Query, Key, Value**: Lo stesso token viene proiettato in tre spazi diversi tramite tre matrici apprese ($W_Q$, $W_K$, $W_V$):
+	- **Query**: Rappresenta il token corrente che cerca informazioni
+	- **Key**: è l'etichetta degli altri token valutati per determinare quanto siano rilevanti per la query
+	- **Value**: È il contenuto effettivo del token 
+- **scaling**: il prodotto scalare tra Q e K viene diviso per la radice quadrata della dimensione dei vettori per evitare l'esplosione dei valori e mantenere stabili i gradienti nel Softmax.
 
 ### 6.2 Perché Self-Attention è Superiore alle RNN
 
-| Caratteristica | RNN | Transformer (Self-Attention) |
-|---|---|---|
-| Complessità sequenziale | $O(n)$ (deve processare token uno alla volta) | $O(1)$ (tutti i token in parallelo) |
-| Dipendenze a lungo raggio | Peggiora con distanza (vanishing gradient) | Sempre $O(1)$ — qualsiasi token comunica direttamente con qualsiasi altro |
-| Parallelizzazione | Impossibile | **Completa** — tutti i token processati simultaneamente |
+| Caratteristica            | RNN                                           | Transformer (Self-Attention)                                              |
+| ------------------------- | --------------------------------------------- | ------------------------------------------------------------------------- |
+| Complessità sequenziale   | $O(n)$ (deve processare token uno alla volta) | $O(1)$ (tutti i token in parallelo)                                       |
+| Dipendenze a lungo raggio | Peggiora con distanza (vanishing gradient)    | Sempre $O(1)$ — qualsiasi token comunica direttamente con qualsiasi altro |
+| Parallelizzazione         | Impossibile                                   | **Completa** — tutti i token processati simultaneamente                   |
 
 ### 6.3 Multi-Head Attention
 
-- **Più teste di attenzione** operano in parallelo, ciascuna con le proprie matrici $W_Q$, $W_K$, $W_V$
-- Ogni testa cattura relazioni diverse:
-  - Una testa per relazioni sintattiche (es. soggetto-verbo)
-  - Una testa per dipendenze a lunga distanza
-  - Una testa per entità e relazioni semantiche
-- I risultati di tutte le teste vengono concatenati e proiettati tramite un'ulteriore matrice $W_O$
+- Permette di apprendere diverse relazioni sintattiche e semantiche simultaneamente in parallelo
 
 ### 6.4 Componenti Chiave del Transformer
 
-1. **Residual Connections** (Residual Stream): $x_{\text{new}} = x_{\text{old}} + \text{Attention}(x_{\text{old}})$
-   - Permette all'informazione di fluire direttamente attraverso i layer
-   - Previene la scomparsa del gradiente
-   - Stabilizza l'addestramento di reti profonde
+1. **Residual Connections** (Residual Stream): 
+	- Permette all'informazione di fluire direttamente attraverso i layer
+	- Previene la scomparsa del gradiente
+	- Stabilizza l'addestramento di reti profonde
 2. **Layer Normalization**: Normalizza le attivazioni per mantenere valori in range stabile
-3. **Positional Embeddings**: Poiché self-attention è **invarante alla posizione** (scambia due token e ottieni lo stesso risultato), si aggiungono vettori posizionali
-   - Nel paper originale: funzioni seno/coseno a diverse frequenze
-   - Ogni posizione riceve una **firma unica**
-   - *"L'hanno provata e ha funzionato — la giustificazione formale era empirica"*
-
-### 6.5 Mascheramento Causale (Decoder)
-
-Nel **decoder** (modello causale/autoregressivo):
-- I token non possono "guardare avanti" ai token futuri
-- La matrice dei pesi di attenzione è **mascherata**: i pesi per i token futuri sono impostati a $-\infty$ prima della softmax, diventando zero
-- Questo garantisce che la predizione al tempo $t$ dipenda solo dai token passati ($< t$)
-
+3. **Positional Embeddings**: Poiché i Transformer non sono ricorsivi, l'ordine delle parole viene iniettato tramite funzioni seno e coseno
+4. **Masking**: Nel decoder, impedisce al modello di "vedere il futuro" durante la generazione, mascherando i token successivi
 ---
-
-## 7. BERT: Pre-training e Fine-Tuning
-
-### 7.1 Architettura Encoder-Only (BERT)
-
-- **Bidirezionale**: A differenza del decoder causale, BERT guarda sia a sinistra che a destra
-- **Task principale**: **Masked Language Modeling (MLM)**
-  - 15% dei token vengono mascherati (sostituiti con `[MASK]`)
-  - Di questi 15%: 80% → `[MASK]`, 10% → parola casuale, 10% → invariato
-  - Il modello deve predire i token originali
-  - *"Alcune parole non sono state modificate e altre sì — il modello deve capire quali"*
-
+## 7.  varianti di BERT e modelli avanzati
+### 7.1 Masked Language Modeling (MLM)
+- **Task principale**: **Il modello deve predire i token originali**
+- Pre-training dove il 15% dei token viene mascherato o sostituito per costringere il modello a comprendere il contesto bidirezionale
 ### 7.2 Next Sentence Prediction (NSP)
-
 - **Task secondario**: Dopo MLM, si sostituisce la testa e si aggiunge NSP
 - **Input**: Due frasi separate dal token `[SEP]`
 - **Classificazione binaria**: La seconda frase è consecutiva alla prima? (sì/no)
-- **Token `[CLS]`**: Inserito all'inizio della sequenza, la sua rappresentazione finale viene usata per la classificazione (con una sigmoide)
-
 ### 7.3 Fine-Tuning
-
 - **Pre-training**: Costoso, su enormi quantità di dati non etichettati (MLM + NSP)
 - **Fine-tuning**: Veloce, su singola GPU
   - Si rimuovono le teste pre-training (MLM, NSP)
@@ -304,39 +268,20 @@ Nel **decoder** (modello causale/autoregressivo):
 ---
 
 ## 8. Strategie di Decoding
-
 ### 8.1 Greedy Decoding
-- Sceglie sempre il token più probabile
-- **Problema**: Testo ripetitivo e prevedibile ("troppo ovvio")
-
+- Sceglie sempre il token più probabile, ma spesso "predictable"
 ### 8.2 Temperature Sampling
-- Scala i logit prima della softmax: $p_i = \frac{e^{z_i / T}}{\sum e^{z_j / T}}$
-  - **T bassa** (es. 0.2): Distribuzione più sharp, quasi greedy
-  - **T alta** (es. 1.5): Distribuzione più uniforme, più creativa/random
-
+- usa un parametro che regola la casualità. Una temperatura bassa rende il testo più deterministico, una alta lo rende più creativo/casuale.
 ### 8.3 Top-k Sampling
-- Considera solo i $k$ token con probabilità più alta
-- **Problema**: Con $k$ fisso, a volte si include troppo rumore
-
-### 8.4 Top-p (Nucleus) Sampling
-- Considera il sottoinsieme minimo di token la cui probabilità cumulativa supera $p$
-
-### 8.5 Beam Search
+- Considera solo i $k$ token con probabilità più alta, a volte però include troppo rumore
+### 8.4 Beam Search
 - Mantiene attivi **più percorsi** di generazione in parallelo (beam width)
 - Ogni passo, per ogni percorso, si espande considerando i token più probabili
 - Si mantengono i $k$ percorsi globalmente più probabili
 - Alla fine, si sceglie la sequenza con probabilità complessiva più alta
-- Esempio: "The green witch" vs "The green witch" → beam search esplora entrambe le ramificazioni
 
----
-
-## 9. Collegamenti e Parallelismi
-
-### Self-Attention ↔ Rocchio Relevance Feedback
-- **Rocchio**: Muove il vettore query verso il centro dei documenti rilevanti e lontano dai non rilevanti
-- **Self-Attention**: Sposta l'embedding di un token verso i token che l'attenzione indica come rilevanti per il contesto
-- Stessa idea di base: **aggiustare rappresentazioni basandosi su ciò che è rilevante**
-
-### Attenzione ↔ Ricerca per Similarità in IR
-- Il calcolo degli score di attenzione (dot product) è **identico** al calcolo di similarità nei motori di ricerca
-- *"Nell'attenzione, ogni passo del decoder fa essenzialmente una query di retrieval su tutti gli hidden state dell'encoder"*
+> [!CRUCIAL]
+    > ### Self-Attention ↔ Rocchio Relevance Feedback
+> - **Rocchio**: Muove il vettore query verso il centro dei documenti rilevanti e lontano dai non rilevanti
+> - **Self-Attention**: Sposta l'embedding di un token verso i token che l'attenzione indica come rilevanti per il contesto
+> - Stessa idea di base: **aggiustare rappresentazioni basandosi su ciò che è rilevante**
