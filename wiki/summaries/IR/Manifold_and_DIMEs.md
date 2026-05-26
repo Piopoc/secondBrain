@@ -18,3 +18,5 @@ A DIME output is a query-dependent vector where each element $i$ estimates how "
 3. **Pseudo-Relevance Feedback DIME:** Uses the centroid of the top $\tau$ retrieved documents as a pseudo-relevant document to estimate importance.
 4. **LLM DIME:** Employs an LLM to generate a response to the query, which then acts as a pseudo-relevant document.
 5. **LLM-as-a-Judge DIME:** Scans the top $\tau$ retrieved documents using an LLM to judge which dimensions are most effective.
+
+![[Pasted image 20260525002151.png]]

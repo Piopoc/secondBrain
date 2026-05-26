@@ -29,3 +29,6 @@ Chronological record of all operations.
 - [2026-05-21] ingest | IR Measurement Theory - Processed raw/16. Created summary, 7 concepts, 6 entities and updated IR Index.
 - [2026-05-21] ingest | IR Advanced Topics - Analyzed raw/13-15 images. Created summaries for RAG Alternatives, Manifold/DIMEs and Quantum Computing. Updated IR Index.
 - [2026-05-21] ingest | WA Semantic Web & Forms - Processed Semantic_Web_Summary.md and Form_Validation_AJAX_Summary.md. Created 15+ concepts, 1 entity and 2 summaries in /wiki/summaries/WA/. Updated WA Index.
+- [2026-05-23] maintenance | WA Concepts - Created Single Responsibility Principle (SRP) concept and linked it to DAO Pattern and MVC summaries.
+- [2026-05-23] maintenance | WA DAO Pattern - Added detailed 12-step architectural workflow showing end-to-end request processing from client to database and back.
+- [2026-05-23] maintenance | Exercises - Added jQuery code examples to Esempi codice per Esame.md for potential code commentary questions on exam, with introductory comments explaining each section's purpose.

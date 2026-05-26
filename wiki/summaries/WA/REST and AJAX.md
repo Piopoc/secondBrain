@@ -21,8 +21,8 @@ To implement a RESTful service, the following steps are followed:
 1. Identify the resources to be exposed.
 2. Create descriptive URIs (using nouns).
 3. Map HTTP methods to [[CRUD]] operations:
-    - `GET` $\rightarrow$ Read
     - `POST` $\rightarrow$ Create
+    - `GET` $\rightarrow$ Read
     - `PUT` $\rightarrow$ Update
     - `DELETE` $\rightarrow$ Delete
 4. Use hypermedia (links) to allow navigation between resources.
@@ -52,3 +52,6 @@ The standard process for making an asynchronous request is:
 The callback function must verify:
 - **Ready State**: Ensure `xhr.readyState` is equal to `XMLHttpRequest.DONE`.
 - **HTTP Status**: Check that `xhr.status` is `200` (OK) before processing the data.
+---
+
+![[Pasted image 20260525152610.png]]

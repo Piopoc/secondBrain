@@ -1,6 +1,6 @@
 ---
 date: 2026-05-08
-source: [[raw/10/image5.png]], [[raw/10/image6.png]]
+source: [[raw/10/image5.png]]
 tags: [statistics, hypothesis-testing]
 ---
 

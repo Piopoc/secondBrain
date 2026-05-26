@@ -27,7 +27,7 @@ The transformation from a JSP file to a running servlet follows a specific seque
 - **[[JSP Standard Tag Library (JSTL)]]**: A collection of standard tags (core, XML, formatting, database, functions) that reduce the need for scripting.
 
 ## Model-View-Controller (MVC) Paradigm
-The [[MVC Architectural Pattern]] is used to decouple the application's internal representation of information from the ways that information is presented to and accepted from the user.
+The [[MVC Architectural Pattern]] is used to decouple the application's internal representation of information from the ways that information is presented to and accepted from the user. This embodies the [[Single Responsibility Principle (SRP)]] at the architectural level: each component (Model, View, Controller) has exactly one responsibility.
 
 ### The Three Components
 1. **Model**: Represents the application state and business logic. Implemented using [[Java Beans]] and the [[wiki/concepts/DAO Pattern]].

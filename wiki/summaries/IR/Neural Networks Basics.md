@@ -17,6 +17,7 @@ This source provides a theoretical and mathematical foundation for neural networ
 - **Neural Unit**: Performs weighted sums followed by an [[Activation Function]].
 - **Neural Language Models**: Uses a fixed context window of words, represented via [[One-hot Encoding]] and transformed into [[Embedding Vector]]s to predict the next word.
 - **Training**: Employs [[Self-Supervision]] and [[Cross-entropy Loss]] optimized via [[Stochastic Gradient Descent]].
+	- la parola in output diventa parte dell'input (slitta la finestra di contesto)
 
 ## 3. Recurrent Neural Networks (RNN)
 - **Concept**: Designed for sequential data by introducing a [[Hidden State]] that acts as memory, carrying context from previous time steps.

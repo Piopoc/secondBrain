@@ -69,7 +69,7 @@ public class WelcomeServlet extends HttpServlet {
 			out.println("<h1>Benvenuto, " + username + "!</h1>"); 
 			out.println("<p>Login effettuato il: " + new Date(loginTime) + "</p>"); 
 			out.println("<a href='logout'>Logout</a>");
-			out.println(""); 
+			out.println("</html></body>"); 
 		} else { 
 		// Sessione non valida o scaduta 
 		response.sendRedirect("login"); 
@@ -172,20 +172,193 @@ public class CustomerDAOImpl implements CustomerDAO {
             statement.setDate(3, new java.sql.Date(customer.getRegistrationDate().getTime()));
             // Execute update
             int affectedRows = statement.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Creating customer failed, no rows affected.");
-            }
-            // Get generated ID
-            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    // In real implementation, would return customer with ID
-                    // For simplicity, just log the ID
-                    System.out.println("Generated ID: " + generatedKeys.getInt(1));
-                }
-            }
+			if (statement != null) statement.close();
         }
     }   
     // Altri metodi dell'interfaccia...
 }
 ```
 # 
+
+
+![[Pasted image 20260525145133.png]]
+
+---
+
+![[Pasted image 20260525150206.png]]
+- differenza tra forward e redirect è che quest'ultima cambia URL mentre il primo no
+
+# Esempi codice jQuery
+## Selezione e manipolazione DOM
+Questi esempi mostrano come selezionare elementi HTML usando i selettori jQuery e manipolare le loro proprietà, contenuti, classi e visibilità.
+```javascript
+$(document).ready(function() {
+    // Seleziona tutti i paragrafi e cambia il colore
+    $("p").css("color", "blue");
+    
+    // Seleziona l'elemento con id="header" e cambia il testo
+    $("#header").text("Benvenuto nel sito!");
+    
+    // Aggiunge una classe a tutti gli elementi con classe="highlight"
+    $(".highlight").addClass("important");
+    
+    // Nasconde tutti gli elementi con classe="hidden"
+    $(".hidden").hide();
+    
+    // Mostra l'elemento con id="menu" con un effetto fade
+    $("#menu").fadeIn(1000);
+});
+```
+
+## Gestione eventi
+Questi esempi mostrano come gestire gli eventi degli elementi HTML usando jQuery, come click su pulsanti, cambi di selezione in dropdown e invio di form con validazione.
+```javascript
+$(document).ready(function() {
+    // Gestisce il click su un pulsante
+    $("#submitBtn").click(function() {
+        alert("Pulsante cliccato!");
+        // Previene il comportamento di default del form
+        return false;
+    });
+    
+    // Gestisce il cambio di selezione in un dropdown
+    $("#countrySelect").change(function() {
+        var selectedCountry = $(this).val();
+        $("#selectedCountry").text("Hai selezionato: " + selectedCountry);
+    });
+    
+    // Gestisce l'invio di un form con validazione
+    $("#loginForm").submit(function(event) {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        
+        if (username === "" || password === "") {
+            alert("Per favore compilare tutti i campi");
+            event.preventDefault(); // Blocca l'invio del form
+            return false;
+        }
+        // Se la validazione passa, il form viene inviato normalmente
+    });
+});
+```
+
+## AJAX e chiamata al server
+Questi esempi mostrano come effettuare chiamate asincrone al server usando jQuery Ajax per caricare o inviare dati senza ricaricare la pagina, includendo esempi di richieste GET e POST.
+```javascript
+$(document).ready(function() {
+    // Carica dati dal server senza ricaricare la pagina
+    $("#loadDataBtn").click(function() {
+        $.ajax({
+            url: '/api/getUserData',
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                $("#userInfo").html("<p>Nome: " + response.name + "</p>" +
+                                   "<p>Email: " + response.email + "</p>");
+                $("#userInfo").fadeIn();
+            },
+            error: function(xhr, status, error) {
+                $("#userInfo").html("<p>Errore nel caricamento dei dati</p>").css("color", "red");
+            }
+        });
+    });
+    
+    // Invio dati al server tramite POST
+    $("#registerForm").submit(function() {
+        var userData = {
+            name: $("#name").val(),
+            email: $("#email").val(),
+            password: $("#password").val()
+        };
+        
+        $.post('/api/register', userData, function(response) {
+            if (response.success) {
+                $("#message").html("<p>Registrazione completata!</p>").css("color", "green");
+                $("#registerForm")[0].reset(); // Reset del form
+            } else {
+                $("#message").html("<p>Errore: " + response.message + "</p>").css("color", "red");
+            }
+        }, 'json');
+        
+        return false; // Previene l'invio tradizionale del form
+    });
+});
+
+/* Esempio di chiamata GET semplice */
+$.get("/api/products", function(data) {
+    $("#productList").empty();
+    $.each(data, function(index, product) {
+        $("#productList").append("<li>" + product.name + " - $" + product.price + "</li>");
+    });
+});
+```
+
+## Effetti e animazioni
+Questi esempi mostrano come creare effetti visivi e animazioni usando jQuery, inclusi slide, fade e animazioni personalizzate di proprietà CSS.
+```javascript
+$(document).ready(function() {
+    // Mostra/nasconde con effetto slide
+    $("#toggleBtn").click(function() {
+        $("#panel").slideToggle("slow");
+        // Cambia il testo del pulsante in base allo stato
+        if ($("#panel").is(":visible")) {
+            $(this).text("Nascondi pannello");
+        } else {
+            $(this).text("Mostra pannello");
+        }
+    });
+    
+    // Animazione personalizzata
+    $("#animateBtn").click(function() {
+        $("#box").animate({
+            left: '250px',
+            opacity: '0.5',
+            height: '150px',
+            width: '150px'
+        }, 2000);
+    });
+    
+    // Effetto fade in/out
+    $("#fadeInBtn").click(function() {
+        $("#fadeElement").fadeIn(2000);
+    });
+    
+    $("#fadeOutBtn").click(function() {
+        $("#fadeElement").fadeOut(2000);
+    });
+});
+```
+
+## Utilità e metodi comuni
+Questi esempi mostrano metodi utili di jQuery per eseguire operazioni comuni sugli elementi DOM, come iterazione, filtraggio, aggiunta, clonazione e rimozione di elementi.
+```javascript
+$(document).ready(function() {
+    // Iterazione su elementi
+    $("li.item").each(function(index) {
+        $(this).text("Elemento " + (index + 1) + ": " + $(this).text());
+    });
+    
+    // Filtraggio elementi
+    $("input[type='text']").filter(function() {
+        return $(this).val().length < 3;
+    }).css("border", "2px solid red");
+    
+    // Aggiunta di elementi dinamicamente
+    $("#addItemBtn").click(function() {
+        var newItem = $("<li>").text("Nuovo elemento " + ($("#itemList li").length + 1));
+        $("#itemList").append(newItem);
+    });
+    
+    // Clonazione di elementi
+    $("#cloneBtn").click(function() {
+        var cloned = $("#original").clone();
+        cloned.attr("id", "cloned_" + Date.now()); // Cambia l'ID per evitare duplicati
+        $("#container").append(cloned);
+    });
+    
+    // Rimozione di elementi
+    $(".removeItem").click(function() {
+        $(this).parent().remove(); // Rimuove l'elemento genitore (li)
+    });
+});
+```
