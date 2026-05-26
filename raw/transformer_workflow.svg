@@ -1,0 +1,137 @@
+<svg width="680" viewBox="0 0 680 820" xmlns="http://www.w3.org/2000/svg" role="img">
+<title>Workflow end-to-end di un Transformer</title>
+<desc>Diagramma che mostra il flusso di un token dall input all output in un Transformer: embedding, positional encoding, layer di attenzione e feed-forward, fino alla predizione del token successivo.</desc>
+<defs>
+  <style>
+    text { font-family: sans-serif; fill: #1a1a1a; }
+    .th { font-size: 14px; font-weight: 500; }
+    .ts { font-size: 12px; fill: #555; }
+    .arr { stroke: #555; stroke-width: 1.5; fill: none; }
+    .node-gray rect { fill: #f1efe8; stroke: #888780; }
+    .node-teal rect { fill: #e1f5ee; stroke: #0f6e56; }
+    .node-teal text { fill: #085041; }
+    .node-purple rect { fill: #eeedfe; stroke: #534ab7; }
+    .node-purple text { fill: #3c3489; }
+    .node-gray text { fill: #444441; }
+    .node-coral rect { fill: #faece7; stroke: #993c1d; }
+    .node-coral text { fill: #712b13; }
+    .node-amber rect { fill: #faeeda; stroke: #854f0b; }
+    .node-amber text { fill: #633806; }
+    .node-blue rect { fill: #e6f1fb; stroke: #185fa5; }
+    .node-blue text { fill: #0c447c; }
+    .node-green rect { fill: #eaf3de; stroke: #3b6d11; }
+    .node-green text { fill: #27500a; }
+    .leader { stroke: #aaa; stroke-width: 0.5; stroke-dasharray: 4 3; fill: none; }
+  </style>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+</defs>
+
+<!-- INPUT TOKENS -->
+<g class="node-gray">
+  <rect x="190" y="30" width="300" height="52" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="52" text-anchor="middle" dominant-baseline="central">Token di input</text>
+  <text class="ts" x="340" y="70" text-anchor="middle" dominant-baseline="central">"il", "gatto", "mangia"</text>
+</g>
+
+<line x1="340" y1="82" x2="340" y2="112" class="arr" marker-end="url(#arrow)"/>
+<text class="ts" x="358" y="101" dominant-baseline="central">lookup</text>
+
+<!-- EMBEDDING -->
+<g class="node-teal">
+  <rect x="190" y="112" width="300" height="52" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="134" text-anchor="middle" dominant-baseline="central">Embedding</text>
+  <text class="ts" x="340" y="152" text-anchor="middle" dominant-baseline="central">Ogni token diventa un vettore numerico</text>
+</g>
+
+<line x1="340" y1="164" x2="340" y2="194" class="arr" marker-end="url(#arrow)"/>
+<text class="ts" x="358" y="183" dominant-baseline="central">somma</text>
+
+<!-- POSITIONAL EMBEDDING -->
+<g class="node-teal">
+  <rect x="190" y="194" width="300" height="52" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="216" text-anchor="middle" dominant-baseline="central">Positional embedding</text>
+  <text class="ts" x="340" y="234" text-anchor="middle" dominant-baseline="central">Aggiunge la firma di posizione</text>
+</g>
+
+<line x1="340" y1="246" x2="340" y2="286" class="arr" marker-end="url(#arrow)"/>
+
+<!-- TRANSFORMER BLOCK container -->
+<rect x="60" y="286" width="560" height="346" rx="14" fill="none" stroke="#aaa" stroke-dasharray="6 4" stroke-width="1"/>
+<text class="ts" x="100" y="308" dominant-baseline="central">x N layer</text>
+
+<!-- SELF-ATTENTION -->
+<g class="node-purple">
+  <rect x="120" y="320" width="440" height="56" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="342" text-anchor="middle" dominant-baseline="central">Multi-Head Self-Attention</text>
+  <text class="ts" x="340" y="362" text-anchor="middle" dominant-baseline="central">Query · Key pesi · Value rappresentazione arricchita</text>
+</g>
+
+<!-- Residual connection sinistra (self-attention) -->
+<path d="M120 348 Q52 348 52 398 Q52 448 120 448" fill="none" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
+<text class="ts" x="28" y="398" text-anchor="middle" dominant-baseline="central">+x</text>
+
+<line x1="340" y1="376" x2="340" y2="406" class="arr" marker-end="url(#arrow)"/>
+
+<!-- LAYER NORM 1 -->
+<g class="node-gray">
+  <rect x="220" y="406" width="240" height="42" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="421" text-anchor="middle" dominant-baseline="central">Layer Norm</text>
+  <text class="ts" x="340" y="439" text-anchor="middle" dominant-baseline="central">Stabilizza le attivazioni</text>
+</g>
+
+<line x1="340" y1="448" x2="340" y2="478" class="arr" marker-end="url(#arrow)"/>
+
+<!-- FEED-FORWARD NETWORK -->
+<g class="node-coral">
+  <rect x="120" y="478" width="440" height="56" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="500" text-anchor="middle" dominant-baseline="central">Feed-Forward Network</text>
+  <text class="ts" x="340" y="518" text-anchor="middle" dominant-baseline="central">Trasformazione non-lineare per token (indipendente)</text>
+</g>
+
+<!-- Residual connection destra (FFN) -->
+<path d="M560 506 Q628 506 628 558 Q628 608 560 608" fill="none" stroke="#aaa" stroke-width="1" marker-end="url(#arrow)"/>
+<text class="ts" x="652" y="558" text-anchor="middle" dominant-baseline="central">+x</text>
+
+<line x1="340" y1="534" x2="340" y2="564" class="arr" marker-end="url(#arrow)"/>
+
+<!-- LAYER NORM 2 -->
+<g class="node-gray">
+  <rect x="220" y="564" width="240" height="42" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="579" text-anchor="middle" dominant-baseline="central">Layer Norm</text>
+  <text class="ts" x="340" y="597" text-anchor="middle" dominant-baseline="central">Prima del prossimo layer</text>
+</g>
+
+<line x1="340" y1="632" x2="340" y2="672" class="arr" marker-end="url(#arrow)"/>
+<text class="ts" x="358" y="654" dominant-baseline="central">output layer</text>
+
+<!-- CAUSAL MASK callout -->
+<g class="node-amber">
+  <rect x="462" y="328" width="140" height="42" rx="8" stroke-width="0.5"/>
+  <text class="th" x="532" y="343" text-anchor="middle" dominant-baseline="central">Causal mask</text>
+  <text class="ts" x="532" y="361" text-anchor="middle" dominant-baseline="central">Blocca i token futuri</text>
+</g>
+<line x1="532" y1="370" x2="532" y2="376" class="leader"/>
+
+<!-- LINEAR + SOFTMAX -->
+<g class="node-blue">
+  <rect x="190" y="672" width="300" height="52" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="694" text-anchor="middle" dominant-baseline="central">Linear + Softmax</text>
+  <text class="ts" x="340" y="712" text-anchor="middle" dominant-baseline="central">Probabilita sul vocabolario</text>
+</g>
+
+<line x1="340" y1="724" x2="340" y2="754" class="arr" marker-end="url(#arrow)"/>
+
+<!-- NEXT TOKEN -->
+<g class="node-green">
+  <rect x="190" y="754" width="300" height="46" rx="8" stroke-width="0.5"/>
+  <text class="th" x="340" y="777" text-anchor="middle" dominant-baseline="central">Token predetto</text>
+  <text class="ts" x="340" y="793" text-anchor="middle" dominant-baseline="central">Rientra nell input al passo t+1</text>
+</g>
+
+<!-- Loop autoregressivo -->
+<path d="M490 777 Q640 777 640 440 Q640 82 490 56" fill="none" stroke="#aaa" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+<text class="ts" x="660" y="430" text-anchor="middle" dominant-baseline="central" transform="rotate(-90 660 430)">loop autoregressivo</text>
+
+</svg>

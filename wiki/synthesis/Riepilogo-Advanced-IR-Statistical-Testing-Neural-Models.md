@@ -181,7 +181,7 @@ Durante il training sequenziale:
 ---
 
 ## 5. Architettura Encoder-Decoder e Attenzione
-
+![[rnn_encoder_decoder_architecture.svg|695]]
 ### 5.1 Encoder-Decoder
 
 - **Encoder**: RNN che processa l'intera sequenza di input e produce un **context vector** (ultimo hidden state)
@@ -216,7 +216,7 @@ Processo passo-passo:
 ---
 
 ## 6. Transformer: La Rivoluzione
-
+![[transformer_workflow.svg]]
 ### 6.1 Self-Attention nei Transformer
 
 **Differenza dall'attenzione classica**: 
